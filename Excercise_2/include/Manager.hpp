@@ -83,6 +83,12 @@ class Manager {
         void Exit(){
             cout <<"=============Exit===============\n";
         }
+        bool checkIdNumber(string id){
+            for (auto i: this->manager){
+                if (i->getIdDocument() == id) return false;
+            }
+            return true;
+        }
         ~Manager(){
             for (auto i: this->manager){
                 delete i;

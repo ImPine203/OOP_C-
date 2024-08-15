@@ -1,8 +1,13 @@
 #include <Manager.hpp>
 
-void enterInformation(string &idDocument, string &publisherName, int &circulationNumber){
-    cout << "Enter ID of document: \n";
-    getline(cin,idDocument);
+void enterInformation(string &idDocument, string &publisherName, int &circulationNumber, Manager manager){
+    do{
+        cout << "Enter ID of document: \n";
+        getline(cin,idDocument);
+        if(!manager.checkIdNumber(idDocument)){
+            cout << "This ID is existed, enter another ID!\n";
+        }
+    }while(!manager.checkIdNumber(idDocument));
     cout << "Enter name of publisher: \n";
     getline(cin,publisherName);
     cout << "Enter circulation number: \n";
@@ -18,7 +23,7 @@ int main(){
         cout <<"================================================\n";
         cout <<"Enter 1: Add new officer!\n";
         cout << "Enter 2: Show information\n";
-        cout << "Enter 3: Search officer by name!\n";
+        cout << "Enter 3: Search officer by type!\n";
         cout << "Enter 4: Exit!\n";
         cout <<"================================================\n";
         cin >> select;
@@ -45,7 +50,7 @@ int main(){
                                 {
                                     string authorName;
                                     int numberOfPage;
-                                    enterInformation(idDocument, publisherName, circulationNumber);
+                                    enterInformation(idDocument, publisherName, circulationNumber,manager);
                                     cout << "Enter name of author: \n";
                                     getline(cin, authorName);
                                     cout << "Enter number of page: \n";
@@ -59,7 +64,7 @@ int main(){
                                 {
                                     string issueNumber;
                                     string issueMonth;
-                                    enterInformation(idDocument, publisherName, circulationNumber);
+                                    enterInformation(idDocument, publisherName, circulationNumber,manager);
                                     cout << "Enter issue number: \n";
                                     getline(cin, issueNumber);
                                     cout << "Enter issue month: \n";
@@ -71,7 +76,7 @@ int main(){
                             case 3:
                                 {
                                     string issueDay;
-                                    enterInformation(idDocument, publisherName, circulationNumber);
+                                    enterInformation(idDocument, publisherName, circulationNumber,manager);
                                     cout << "Enter issue day: \n";
                                     getline(cin,issueDay);
                                     Document* ptr = new Newspaper(idDocument, publisherName, circulationNumber, issueDay);
@@ -102,6 +107,7 @@ int main(){
                         cout <<"================================================\n";
                         cin >> type;
                         cin.ignore();
+                        if(type >3||type <1) cout << "Invalid value, enter a number from 1 to 3\n";
                     } while ((type <1||type>3));
                     manager.searchByType(type);
                     break;
