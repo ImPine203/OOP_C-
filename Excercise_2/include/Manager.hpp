@@ -14,11 +14,19 @@ class Manager {
             manager.push_back(document);
         }
         void deleteDocumentByID(string id){
-            for(auto i: this->manager){
-                if(i->getIdDocument()==id){
-                    delete i;
+            auto it = this->manager.begin();
+            while (it != this->manager.end()) {
+                if ((*it)->getIdDocument() == id) {
+                    delete *it;
+                    it = this->manager.erase(it);
+                    cout << "Delete document with ID " << id << " successful\n\n";
+                    return;
+                } else {
+                    ++it;
                 }
             }
+            // Can't find this id to delete
+            cout << "This ID is incorrect\n\n";
         }
         void generalInformation(Document * document){
             cout << "ID of this document: "<<document->getIdDocument()<<endl;
@@ -26,9 +34,15 @@ class Manager {
             cout << "Circulation number of this document: "<<document->getCirculationNumber()<<endl;            
         }
         void displayAllDocument(){
-            int count =0;
+            if(this->manager.empty() == 1) {
+                cout << "Don't have document\n";
+                return; 
+            }
+            int count =1;
             for (auto i: this->manager){
-                cout << "Document number "<<count<<endl;
+                cout << i<< endl;
+                if(i==nullptr) continue;
+                cout << "Document number "<<count++<<endl;
                 // General information
                 generalInformation(i);
                 // Specific information
@@ -36,15 +50,18 @@ class Manager {
                 if(i->getAuthorName()!="\0"){
                     cout<<"Author of this document: "<<i->getAuthorName()<<endl;
                     cout<<"Number of pages of this document: "<<i->getNumberOfPage()<<endl;
+                    cout << endl;
                 }
                 // Magazine
                 else if(i->getIssueMonth()!="\0"){
                     cout<<"Issue month of this document: "<<i->getIssueMonth()<<endl;
                     cout<<"Issue number of this document: "<<i->getIssueNumber()<<endl;
+                    cout << endl;
                 }
                 // Newspaper
                 else{
                     cout<<"Issue day of this document: "<<i->getIssueDay()<<endl;
+                    cout << endl;
                 }
                 
             }
@@ -92,6 +109,7 @@ class Manager {
         ~Manager(){
             for (auto i: this->manager){
                 delete i;
+                i= nullptr;
             }
         }
 };

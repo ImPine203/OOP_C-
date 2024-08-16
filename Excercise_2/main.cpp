@@ -1,6 +1,6 @@
 #include <Manager.hpp>
 
-void enterInformation(string &idDocument, string &publisherName, int &circulationNumber, Manager manager){
+void enterInformation(string &idDocument, string &publisherName, int &circulationNumber, Manager &manager){
     do{
         cout << "Enter ID of document: \n";
         getline(cin,idDocument);
@@ -21,10 +21,11 @@ int main(){
     do{
         //int a;
         cout <<"================================================\n";
-        cout <<"Enter 1: Add new officer!\n";
-        cout << "Enter 2: Show information\n";
-        cout << "Enter 3: Search officer by type!\n";
-        cout << "Enter 4: Exit!\n";
+        cout <<"Enter 1: Add new document!\n\n";
+        cout <<"Enter 2: Delete document by ID\n\n";
+        cout << "Enter 3: Show information\n\n";
+        cout << "Enter 4: Search officer by type!\n\n";
+        cout << "Enter 5: Exit!\n\n";
         cout <<"================================================\n";
         cin >> select;
         cin.ignore();
@@ -56,8 +57,8 @@ int main(){
                                     cout << "Enter number of page: \n";
                                     cin>>numberOfPage;
                                     cin.ignore();
-                                    Document* ptr = new Book(idDocument, publisherName, circulationNumber, authorName, numberOfPage);
-                                    manager.addDocument(ptr);
+                                    //Document* ptr = new Book(idDocument, publisherName, circulationNumber, authorName, numberOfPage);
+                                    manager.addDocument(new Book(idDocument, publisherName, circulationNumber, authorName, numberOfPage));
                                     break;
                                 }
                             case 2:
@@ -69,8 +70,8 @@ int main(){
                                     getline(cin, issueNumber);
                                     cout << "Enter issue month: \n";
                                     getline(cin,issueMonth);
-                                    Document* ptr = new Magazine(idDocument, publisherName, circulationNumber, issueNumber, issueMonth);
-                                    manager.addDocument(ptr);
+                                    //Document* ptr = new Magazine(idDocument, publisherName, circulationNumber, issueNumber, issueMonth);
+                                    manager.addDocument(new Magazine(idDocument, publisherName, circulationNumber, issueNumber, issueMonth));
                                     break;
                                 }
                             case 3:
@@ -79,8 +80,8 @@ int main(){
                                     enterInformation(idDocument, publisherName, circulationNumber,manager);
                                     cout << "Enter issue day: \n";
                                     getline(cin,issueDay);
-                                    Document* ptr = new Newspaper(idDocument, publisherName, circulationNumber, issueDay);
-                                    manager.addDocument(ptr);
+                                    //Document* ptr = new Newspaper(idDocument, publisherName, circulationNumber, issueDay);
+                                    manager.addDocument(new Newspaper(idDocument, publisherName, circulationNumber, issueDay));
                                     break;                                
                                 }
                             default:
@@ -93,9 +94,18 @@ int main(){
                 }
             case 2:
                 {
-                    manager.displayAllDocument();
+                    string id;
+                    cout << "Endter ID of document you want to delete \n";
+                    getline(cin,id);
+                    manager.deleteDocumentByID(id);
+                    break;
                 }
             case 3:
+                {
+                    manager.displayAllDocument();
+                    break;
+                }
+            case 4:
                 {
                     int type;
                     do{
@@ -113,14 +123,15 @@ int main(){
                     break;
                         
                 }
-            case 4:
+            case 5:
                 {
                     manager.Exit();
+                    break;
                 }
             default:
                 {
-                    cout << "Error value, enter number from 1 to 4!\n";
+                    cout << "Error value, enter number from 1 to 5!\n";
                 }
         }
-    }while (select !=4);
+    }while (select !=5);
 }
