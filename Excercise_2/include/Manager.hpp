@@ -107,9 +107,10 @@ class Manager {
             return true;
         }
         ~Manager(){
-            for (auto i: this->manager){
-                delete i;
-                i= nullptr;
+            auto it = this->manager.begin();
+            while(it!= this->manager.end()){
+                delete *it;
+                it++;
             }
         }
 };
