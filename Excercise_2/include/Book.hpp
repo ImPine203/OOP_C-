@@ -12,13 +12,13 @@ class Book: public Document{
             this ->authorName= authorName;
             this ->numberOfPage = numberOfPage;
         }
-        virtual string getAuthorName() const {
+        string getAuthorName() const {
             return authorName;
         }
         void setAuthorName(string authorName){
             this->authorName = authorName;
         }
-        virtual int getNumberOfPage(){
+        int getNumberOfPage(){
             return numberOfPage;
         }
         void setNumberOfPage(int numberOfPage){
