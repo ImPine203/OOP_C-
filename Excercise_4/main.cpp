@@ -6,5 +6,7 @@ int main(){
     cin>>numberOfHousehold;
     District dis(numberOfHousehold);
     dis.addHousehould(numberOfHousehold);
+    cout << endl;
+    dis.display();
     
 }

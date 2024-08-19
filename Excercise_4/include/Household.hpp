@@ -47,7 +47,7 @@ class Household{
         }
         vector<Person*> addPerson(short int numberOfMember){
             int count = 1;
-            while(count < numberOfMember){
+            while(count <= numberOfMember){
                 cout << "Enter information of member number "<<count++<<endl;
                 string name;
                 short int age;
@@ -57,6 +57,21 @@ class Household{
                 this->member.push_back(new Person(name, age, job, ID));
             }
             return this->member;
+        }
+        void displayHousehold(){
+            int count = 1;
+            cout <<"----------------------\n";
+            cout << "Household's Number: "<<this->getHouseNumber()<<endl;
+            auto it = this->member.begin();
+            while(it!=this->member.end()){
+                cout<<"Member number "<<count++<<endl;
+                cout << "Name: "<< (*it)->getName()<<endl;
+                cout << "Age: "<< (*it)->getAge()<<endl;
+                cout << "Job: "<< (*it)->getJob()<<endl;
+                cout << "ID: "<< (*it)->getID()<<endl;
+                cout << endl;
+                it++;
+            }
         }
 };
 

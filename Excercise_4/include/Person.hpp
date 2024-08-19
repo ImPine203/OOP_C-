@@ -15,28 +15,32 @@ class Person{
             this->job = job;
             this->ID = ID;
         }
+        // getter and setter for name
         string getName(){
             return name;
         }
         void setName(string name){
             this->name = name;
         }
+        // getter and setter for age
         short int getAge(){
             return age;
         }
         void setAge(short int age){
             this->age = age;
         }
+        // getter and setter for Job
         string getJob(){
             return job;
         }
-        void setName(string job){
+        void setJob(string job){
             this->job = job;
         }
+        // getter and setter for ID
         string getID(){
             return ID;
         }
-        void setName(string ID){
+        void setID(string ID){
             this->ID = ID;
         }
 

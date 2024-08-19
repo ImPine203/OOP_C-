@@ -28,11 +28,11 @@ class District{
             cout<<"Enter number of member: \n";
             cin>>numberOfMember;
             cin.ignore();
-            household.addPerson(numberOfMember);
+            // household.addPerson(numberOfMember);
         }
         void addHousehould(int numberOfHousehold){
             int count = 1;
-            while (count < numberOfHousehold)
+            while (count <= numberOfHousehold)
             {
                 int houseNumber = 0;
                 short int numberOfMember = 0;
@@ -42,6 +42,15 @@ class District{
                 this->district.push_back(new Household(houseNumber, numberOfMember,household.addPerson(numberOfMember)));
             }
             
+        }
+        void display(){
+            auto i = this->district.begin();
+            int count = 1;
+            while(i!=this->district.end()){
+                cout << "Household number "<<count++<<endl;
+                (*i)->displayHousehold();
+                i++;
+            }
         }
 
 
