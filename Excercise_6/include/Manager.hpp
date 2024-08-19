@@ -52,5 +52,14 @@ class Manager{
             }            
             return count;
         }
+        ~Manager(){
+            auto it = this->manager.begin();
+            while(it != this->manager.end()){               
+                delete (*it);
+                it = this->manager.erase(it);
+                break;
+                it++;
+            }            
+        }
 };
 #endif
