@@ -1,12 +1,12 @@
-#ifndef ROOMB_HPP
-#define ROOMB_HPP
+#ifndef ROOMC_HPP
+#define ROOMC_HPP
 
 #include "Room.hpp"
-class RoomB: public Room{
+class RoomC: public Room{
     private:
         float price;
     public:
-        RoomB(short int rentDay, float price = 100):Room(rentDay){
+        RoomC(short int rentDay, float price = 100):Room(rentDay){
             this->price = price;
         }
         float getPrice(){
