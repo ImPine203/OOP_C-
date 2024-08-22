@@ -7,7 +7,7 @@ class Intern: public Employee{
         int semeter;
         string universityName;
     public:
-        Intern(int ID, string fullName, string birthDay, string phone, string email, int employeeType, int employeeCount, string major, int semeter, string universityName): Employee(ID, fullName, birthDay, phone, email, employeeType, employeeCount){
+        Intern(int ID, string fullName, string birthDay, string phone, string email, int employeeType, string major, int semeter, string universityName): Employee(ID, fullName, birthDay, phone, email, employeeType){
             this->major = major;
             this->semeter = semeter;
             this->universityName = universityName;
@@ -30,8 +30,8 @@ class Intern: public Employee{
         void setUniversityName(string universityName){
             this->universityName = universityName;
         }
-        void showInforItern(){
-            this->showGeneralInfor();
+        void showInfor(){
+            Employee:: showInfor();
             cout<<"Major: "<<this->getMajor()<<endl;
             cout<<"Semeter: "<<this->getSemester()<<endl;
             cout<<"University name: "<<this->getUniversityName()<<endl;

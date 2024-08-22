@@ -7,7 +7,7 @@ class Fresher: public Employee{
         string graduationRank;
         string education;
     public:
-        Fresher(int ID, string fullName, string birthDay, string phone, string email, int employeeType, int employeeCount, string graduationDate, string graduationRank, string education): Employee(ID, fullName, birthDay, phone, email, employeeType, employeeCount){
+        Fresher(int ID, string fullName, string birthDay, string phone, string email, int employeeType, string graduationDate, string graduationRank, string education): Employee(ID, fullName, birthDay, phone, email, employeeType){
             this->graduationDate = graduationDate;
             this->graduationRank = graduationRank;
             this->education = education;
@@ -30,8 +30,8 @@ class Fresher: public Employee{
         void setEducation( string education){
             this->education = education;
         }
-        void showInforFresher(){
-            this->showGeneralInfor();
+        void showInfor(){
+            Employee:: showInfor();
             cout<<"Graduation date: "<<this->getGraduationDate()<<endl;
             cout<<"Graduation rank: "<<this->getGraduationRank()<<endl;
             cout<<"Education: "<<this->getEducation()<<endl;

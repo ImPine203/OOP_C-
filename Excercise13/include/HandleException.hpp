@@ -1,6 +1,7 @@
-#ifndef CHECKVALID_HPP
-#define CHECKVALID_HPP
+#ifndef HANDLEEXCEPTION_HPP
+#define HANDLEEXCEPTION_HPP
 #include <iostream>
+#include<stdexcept>
 using namespace std;
 bool checkBirthDay(string birthDay){
     string s1, s2, s3;
@@ -55,11 +56,9 @@ bool checkBirthDay(string birthDay){
             }
         }
     }
+    return true;
 }
 
-bool checkPhoneNumber(string phone){
-    return (phone.length()!=10)?false:true;
-}
 // Function to check the character 
 // is an alphabet or not 
 bool isChar(char c) 
@@ -74,7 +73,24 @@ bool isDigit(const char c)
 { 
     return (c >= '0' && c <= '9'); 
 } 
-  
+// check valid of phone number
+bool checkPhoneNumber(string phone){
+    string tmp;
+    tmp = phone[0]+phone[1]+phone[2];
+    if(tmp!= "090"&&tmp!= "098"&&tmp!= "091"&&tmp!= "098"&&tmp!= "031"&&tmp!= "035"&&tmp!= "038"&&phone.length()!=10) return false;
+    for(auto i : phone){
+        if(!isDigit(i)) return false;
+    }
+    return true;
+}
+// check name 
+bool checkName(string name){
+    if(name.length()<10||name.length()>50) return false;
+    for (auto i: name){
+        if(isDigit(i)) return false;
+    }
+    return true;
+}  
 // Function to check email id is 
 // valid or not 
 bool checkEmail(string email) 
@@ -124,4 +140,24 @@ bool checkEmail(string email)
     // If Dot is present at the end 
     return !(Dot >= (email.length() - 1)); 
 } 
+
+class InvalidFullNameException: public runtime_error{
+    public:
+        InvalidFullNameException(): runtime_error("\nFull name is invalid. Try again\n"){}
+};
+
+class InvalidEmailException: public runtime_error{
+    public:
+        InvalidEmailException(): runtime_error("\nEmail is invalid. Try again\n"){}
+};
+
+class InvalidBirthdayException: public runtime_error{
+    public:
+        InvalidBirthdayException(): runtime_error("\nBirthday is invalid. Try again\n"){}
+};
+
+class InvalidPhoneNumberException: public runtime_error{
+    public:
+        InvalidPhoneNumberException(): runtime_error("\nPhone number is invalid. Try again\n"){}
+};
 #endif

@@ -6,7 +6,7 @@ class Experience: public Employee{
         int expInYear;
         string proSkill;
     public:
-        Experience(int ID, string fullName, string birthDay, string phone, string email, int employeeType, int employeeCount, int expInYear, string proSkill): Employee(ID, fullName, birthDay, phone, email, employeeType, employeeCount){
+        Experience(int ID, string fullName, string birthDay, string phone, string email, int employeeType, int expInYear, string proSkill): Employee(ID, fullName, birthDay, phone, email, employeeType){
             this->expInYear = expInYear;
             this->proSkill = proSkill;
         }
@@ -22,8 +22,8 @@ class Experience: public Employee{
         void setProSkill(string proSkill){
             this->proSkill = proSkill;
         }
-        void showInforEx(){
-            this->showGeneralInfor();
+        void showInfor(){
+            Employee:: showInfor();
             cout<<"Experience in year: "<<this->getExpInYear()<<endl;
             cout<<"Proskill: "<<this->getProSkill()<<endl;
             if(!this->getCertificate().empty()){

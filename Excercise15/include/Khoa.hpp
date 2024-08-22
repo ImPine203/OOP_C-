@@ -2,6 +2,7 @@
 #define KHOA_HPP
 #include "ChinhQuy.hpp"
 #include "TaiChuc.hpp"
+#include "../../Excercise13/include/HandleException.hpp"
 #include <algorithm>
 #include <vector>
 class Khoa{
@@ -9,12 +10,37 @@ class Khoa{
         vector<SinhVien*> khoa;
     public:
         void themThongTinChung(string &maSV, string &hoTen, string &ngaySinh, int &namVaoHoc, float &diemDauVao){
+            bool check;
             cout<<"Nhap ma sinh vien: \n";
             getline(cin,maSV);
-            cout<<"Nhap ho va ten: \n";
-            getline(cin,hoTen);
-            cout<<"Nhap ngay sinh: \n";
-            getline(cin,ngaySinh);
+            do{
+                try {
+                    cout<<"Nhap ho va ten: \n";
+                    getline(cin, hoTen);	
+                    if(!checkName(hoTen)){
+                        throw InvalidFullNameException();
+                    }
+                    check = true;
+                }
+                catch(InvalidFullNameException &invalidFullName){
+                    cout<<invalidFullName.what()<<endl;
+                }
+            }while(!check);
+            check = false;
+            do{
+                try {
+                    cout<<"Nhap ngay sinh: \n";
+                    getline(cin, ngaySinh);	
+                    if(!checkBirthDay(ngaySinh)){
+                        throw InvalidBirthdayException();
+                    }
+                    check = true;
+                    cout<<endl;
+                }
+                catch(InvalidBirthdayException &invalidBirthday){
+                    cout<<invalidBirthday.what()<<endl;
+                }
+            }while(!check);
             cout<<"Nhap nam vao hoc: \n";
             cin>>namVaoHoc;
             cin.ignore();

@@ -1,91 +1,70 @@
-// C++ program for the above approach 
+#include"../Excercise13/include/HandleException.hpp"
 
-#include <bits/stdc++.h> 
-using namespace std; 
-
-// Function to check the character 
-// is an alphabet or not 
-bool isChar(char c) 
-{ 
-	return ((c >= 'a' && c <= 'z') 
-			|| (c >= 'A' && c <= 'Z')); 
-} 
-
-// Function to check the character 
-// is an digit or not 
-bool isDigit(const char c) 
-{ 
-	return (c >= '0' && c <= '9'); 
-} 
-
-// Function to check email id is 
-// valid or not 
-bool is_valid(string email) 
-{ 
-	// Check the first character 
-	// is an alphabet or not 
-    int countAt = 0, countDot = 0;
-	if (!isChar(email[0])) { 
-
-		// If it's not an alphabet 
-		// email id is not valid 
-		return 0; 
-	} 
-	// Variable to store position 
-	// of At and Dot 
-	int At = -1, Dot = -1; 
-
-	// Traverse over the email id 
-	// string to find position of 
-	// Dot and At 
-	for (int i = 0; 
-		i < email.length(); i++) { 
-
-		// If the character is '@' 
-		if (email[i] == '@') { 
-
-			At = i; 
-            countAt++;
-		} 
-
-		// If character is '.' 
-		else if (email[i] == '.') { 
-
-			Dot = i;
-            countDot++; 
-		} 
-	} 
-
-	// If At or Dot is not present 
-	if (At == -1 || Dot == -1||countDot!=1||countAt!=1) 
-		return 0; 
-
-	// If Dot is present before At 
-	if (At > Dot) 
-		return 0; 
-
-	// If Dot is present at the end 
-	return !(Dot >= (email.length() - 1)); 
-} 
-
-// Driver Code 
-int main() 
-{ 
-	// Given string email 
-	string email = "phamthanhtung2032002@gmail..com"; 
-
-	// Function Call 
-	bool ans = is_valid(email); 
-
-	// Print the result 
-	if (ans) { 
-		cout << email << " : "
-			<< "valid" << endl; 
-	} 
-	else { 
-		cout << email << " : "
-			<< "invalid" << endl; 
-	} 
-
-	return 0; 
-} 
+int main(){
+	string s1 = "Pham Thanh1 Tung", email, birthDay, phone;
+	// cout<<"Enter fullname: \n";
+	bool check = false;
+	// getline(cin, s1);
+	do{
+		try {
+			cout<<"Enter fullname: \n";
+			getline(cin, s1);	
+			if(!checkName(s1)){
+				throw InvalidFullNameException();
+				// check = true;
+			}
+			check = true;
+			cout<<endl;
+		}
+		catch(InvalidFullNameException &invalidFullName){
+			cout<<invalidFullName.what()<<endl;
+			// check = false;
+		}
+		// check = true;
+	}while(!check);
+	check = false;
+	do{
+		try {
+			cout<<"Enter email: \n";
+			getline(cin, email);	
+			if(!checkEmail(email)){
+				throw InvalidEmailException();
+			}
+			check = true;
+			cout<<endl;
+		}
+		catch(InvalidEmailException &invalidEmail){
+			cout<<invalidEmail.what()<<endl;
+		}
+	}while(!check);
+	check = false;
+	do{
+		try {
+			cout<<"Enter birthday: \n";
+			getline(cin, birthDay);	
+			if(!checkBirthDay(birthDay)){
+				throw InvalidBirthdayException();
+			}
+			check = true;
+			cout<<endl;
+		}
+		catch(InvalidBirthdayException &invalidBirthday){
+			cout<<invalidBirthday.what()<<endl;
+		}
+	}while(!check);
+	check = false;
+	do{
+		try {
+			cout<<"Enter phone number: \n";
+			getline(cin, phone);	
+			if(!checkPhoneNumber(phone)){
+				throw InvalidPhoneNumberException();
+			}
+			check = true;
+			cout<<endl;
+		}
+		catch(InvalidPhoneNumberException &invalidPhone){
+			cout<<invalidPhone.what()<<endl;
+		}
+	}while(!check);
+}

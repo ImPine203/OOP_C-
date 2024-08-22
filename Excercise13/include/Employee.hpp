@@ -1,6 +1,8 @@
 #pragma once
 #include "Certificate.hpp"
 #include <vector>
+// class Employee;
+// int Employee::employeeCount = 0;
 class Employee{
     private:
         int ID;
@@ -9,16 +11,15 @@ class Employee{
         string phone;
         string email;
         int employeeType;// 0 = experience, 1= fresher, 2= intern
-        int employeeCount;
+        static int employeeCount;
         vector<Certificate*> certificate;
 
     public:
-        Employee(int ID, string fullName, string birthDay, string phone, string email, int employeeType, int employeeCount){
+        Employee(int ID, string fullName, string birthDay, string phone, string email, int employeeType){
             this->ID = ID;
             this->birthDay = birthDay;
             this-> phone = phone;
             this-> email = email;
-            this->employeeCount =employeeCount;
             this-> employeeType = employeeType;
         }
         int getID(){
@@ -64,8 +65,8 @@ class Employee{
         void setEmployeeType(int employeeType){
             this->employeeType= employeeType;
         }
-        void setEmployeeCount(int employeeCount){
-            this->employeeCount= employeeCount;
+        void setEmployeeCount(){
+            Employee::employeeCount++;
         }
         void setCertificate(Certificate* certificate){
             this->certificate.push_back(certificate);
@@ -94,8 +95,6 @@ class Employee{
         virtual string getUniversityName(){
             return "\0";
         }
-        virtual void showInfor(){            
-        }
         void showCertificate(){
             auto it = this->certificate.begin();
             int count = 1;
@@ -107,7 +106,7 @@ class Employee{
                 cout<<"Date: "<<(*it)->getCertificateDate()<<endl;
             }
         }
-        void showGeneralInfor(){
+        virtual void showInfor(){
             cout <<"ID: "<< this->getID()<<endl;
             cout <<"Full name: "<<this->getFullName()<<endl;
             cout<<"Birthday: "<<this->getBirthDay()<<endl;
@@ -115,8 +114,5 @@ class Employee{
             cout << "Email: "<<this->getEmail()<<endl;
             cout<<"Employee type: "<<this->getEmployeeType()<<endl;
         }
-        virtual void showInforEx(){}
-        virtual void showInforFresher(){}
-        virtual void showInforIntern(){}
 
 };
